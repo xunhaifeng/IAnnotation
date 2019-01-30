@@ -6,6 +6,9 @@ dependencies {
     implementation 'com.squareup:javapoet:1.10.0'
     implementation project(':apt_annotation')
 }
-
+//指定编译的编码
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
+}
 sourceCompatibility = "7"
 targetCompatibility = "7"
