@@ -10,11 +10,36 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-    buildTypes {
+    signingConfigs {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            storeFile file("iannotation.jks")
+            storePassword "123456!"
+            keyAlias "xhf"
+            keyPassword "123456!"
         }
+    }
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+            //Zip代码压缩优化
+            zipAlignEnabled true
+            //移除无用资源
+            //shrinkResources true
+        }
+        release {
+            //Zip代码压缩优化
+            zipAlignEnabled true
+            //移除无用资源
+            //shrinkResources true
+            debuggable false
+            minifyEnabled true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
     }
 }
 
